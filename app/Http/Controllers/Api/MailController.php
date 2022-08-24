@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Mail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Validator;
 
 class MailController extends Controller
 {
@@ -36,7 +38,28 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+        //validation
+        $validation_rules = [
+            'name'          => 'string|required|max:100',
+            'email'         => 'string|required|max:256',
+            'content'       => 'string|required|max:',
+            'mailingList'   => 'required|boolean'
+        ];
+        // $request->validate($validation_rules);
+        // controllo maggiore sul validator
+        $validator = Validator::make($form_data, $validation_rules);
+            
+        if ($validator->fails()) {
+            return response()->json([
+                'success'   => false,
+                'response'  => $validator->errors()
+            ]);
+        }
+        // salvare nel db
+        $mail = Mail::create($form_data);
+        // inviare la mail
+        Mail::to($mail->email)->send(new SendNewMail());
     }
 
     /**
