@@ -7,6 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    Ciao l'invio è riuscito
+    <h1>Ciao {{$lead->name}}</h1>
+    <p>Abbiamo ricevuto il tuo messaggio:
+        {{$lead->content}}
+    </p>
+    <p>qualcuno dei nostri ti risponderà al più presto</p>
 </body>
 </html>

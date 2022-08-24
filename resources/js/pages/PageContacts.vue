@@ -40,7 +40,7 @@ export default {
     // metodi di vue
     methods: {
       submitMessage() {
-        axios.post('/api/mails', {
+        axios.post('/api/leads', {
           name:         this.name,
           email:        this.email,
           content:      this.content,

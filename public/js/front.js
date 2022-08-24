@@ -5251,7 +5251,7 @@ __webpack_require__.r(__webpack_exports__);
   // metodi di vue
   methods: {
     submitMessage: function submitMessage() {
-      axios.post('/api/mails', {
+      axios.post('/api/leads', {
         name: this.name,
         email: this.email,
         content: this.content,

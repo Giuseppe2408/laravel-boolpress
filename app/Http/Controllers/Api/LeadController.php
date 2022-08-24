@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Mail;
+use App\Models\Lead;
+use App\Mail\SendNewMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\SendNewMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-class MailController extends Controller
+class LeadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -57,18 +58,18 @@ class MailController extends Controller
             ]);
         }
         // salvare nel db
-        $mail = Mail::create($form_data);
+        $lead = Lead::create($form_data);
         // inviare la mail
-        Mail::to($mail->email)->send(new SendNewMail());
+        Mail::to($lead->email)->send(new SendNewMail());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Mail  $mail
+     * @param  \App\Models\Lead  $lead
      * @return \Illuminate\Http\Response
      */
-    public function show(Mail $mail)
+    public function show(Lead $lead)
     {
         //
     }
@@ -76,10 +77,10 @@ class MailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Mail  $mail
+     * @param  \App\Models\Lead  $lead
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mail $mail)
+    public function edit(Lead $lead)
     {
         //
     }
@@ -88,10 +89,10 @@ class MailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mail  $mail
+     * @param  \App\Models\Lead  $lead
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mail $mail)
+    public function update(Request $request, Lead $lead)
     {
         //
     }
@@ -99,10 +100,10 @@ class MailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Mail  $mail
+     * @param  \App\Models\Lead  $lead
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mail $mail)
+    public function destroy(Lead $lead)
     {
         //
     }
