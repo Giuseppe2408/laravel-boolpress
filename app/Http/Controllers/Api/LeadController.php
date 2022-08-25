@@ -44,7 +44,7 @@ class LeadController extends Controller
         $validation_rules = [
             'name'          => 'string|required|max:100',
             'email'         => 'string|required|max:256',
-            'content'       => 'string|required|max:',
+            'content'       => 'string|required|max:8000',
             'mailingList'   => 'required|boolean'
         ];
         // $request->validate($validation_rules);
@@ -60,7 +60,7 @@ class LeadController extends Controller
         // salvare nel db
         $lead = Lead::create($form_data);
         // inviare la mail
-        Mail::to($lead->email)->send(new SendNewMail());
+        Mail::to($lead->email)->send(new SendNewMail($lead));
     }
 
     /**
